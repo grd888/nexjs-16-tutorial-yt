@@ -29,6 +29,11 @@ export default function SignUpPage() {
       password: "",
     },
   });
+
+  function onSubmit() {
+    console.log("Submit");
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -36,7 +41,7 @@ export default function SignUpPage() {
         <CardDescription>Create an account to get started</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup className="gap-y-4">
             <Controller
               name="name"
@@ -45,6 +50,7 @@ export default function SignUpPage() {
                 <Field>
                   <FieldLabel>Full Name</FieldLabel>
                   <Input
+                    aria-invalid={fieldState.invalid}
                     placeholder="John Doe"
                     {...field}
                   />
@@ -62,6 +68,7 @@ export default function SignUpPage() {
                 <Field>
                   <FieldLabel>Email</FieldLabel>
                   <Input
+                    aria-invalid={fieldState.invalid}
                     placeholder="john@doe.com"
                     type="email"
                     {...field}
@@ -80,6 +87,7 @@ export default function SignUpPage() {
                 <Field>
                   <FieldLabel>Password</FieldLabel>
                   <Input
+                    aria-invalid={fieldState.invalid}
                     placeholder="******"
                     type="password"
                     {...field}
