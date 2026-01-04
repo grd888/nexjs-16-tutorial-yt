@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button, buttonVariants } from "../ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { useConvexAuth } from "convex/react";
+import { authClient } from "@/lib/auth-client";
 
 export function Navbar() {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -39,7 +40,9 @@ export function Navbar() {
 
       <div className="flex items-center gap-2">
         {isLoading ? null : isAuthenticated ? (
-          <Button>Logout</Button>
+          <Button onClick={() => {
+            authClient.signOut({})
+          }}>Logout</Button>
         ) : (
           <>
             <Link
