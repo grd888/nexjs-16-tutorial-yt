@@ -1,7 +1,17 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 export default function SignUpPage() {
   return (
-    <div>
-      <h1>Sign Up</h1>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Sign Up</CardTitle>
+        <CardDescription>Create an account to get started</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form>
+          
+        </form>
+      </CardContent>
+    </Card>
   );
 }
