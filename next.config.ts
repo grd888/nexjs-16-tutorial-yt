@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         protocol: "https",
         port: ""
+      },
+      {
+        hostname: "original-owl-320.convex.cloud",
+        protocol: "https",
+        port: ""
       }
     ]
   }
