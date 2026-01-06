@@ -1,6 +1,7 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import Image from "next/image";
@@ -35,7 +36,18 @@ export default function BlogPage() {
               <Link href={`/blog/${post._id}`}>
                 <h1 className="text-2xl font-bold hover:text-primary">{post.title}</h1>
               </Link>
+              <p className="text-muted-foreground line-clamp-3">{post.body}</p>
             </CardContent>
+            <CardFooter>
+            <Link
+              className={buttonVariants({
+                className: "w-full",
+              })}
+              href={`/blog/${post._id}`}
+            >
+              Read more
+            </Link>
+          </CardFooter>
           </Card>
         ))}
       </div>
