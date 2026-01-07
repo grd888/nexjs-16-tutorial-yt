@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Id } from "@/convex/_generated/dataModel";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
+import { CommentSection } from "@/components/web/CommentSection";
 
 interface PostIdRouteProps {
   params: {
@@ -53,11 +54,15 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
         </p>
       </div>
 
-      <Separator className="my-8"/>
+      <Separator className="my-8" />
 
-      <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-wrap">{post.body}</p>
+      <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-wrap">
+        {post.body}
+      </p>
 
-      <Separator className="my-8"/>
+      <Separator className="my-8" />
+
+      <CommentSection />
     </div>
   );
 }
