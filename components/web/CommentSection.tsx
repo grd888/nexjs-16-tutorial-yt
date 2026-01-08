@@ -50,7 +50,7 @@ export function CommentSection() {
     <Card>
       <CardHeader className="flex flex-row items-center gap-2 border-b">
         <MessageSquare className="size-5" />
-        <h2 className="text-xl font-bold">5 Comments</h2>
+        <h2 className="text-xl font-bold">{data.length} Comments</h2>
       </CardHeader>
       <CardContent className="space-y-8">
         <form
@@ -87,7 +87,7 @@ export function CommentSection() {
         </form>
 
         {data.length > 0 && <Separator />}
-        
+
         <section className="space-y-6">
           {data?.map((comment) => (
             <div
