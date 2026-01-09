@@ -9,7 +9,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
-import { Preloaded, useMutation, usePreloadedQuery, useQuery } from "convex/react";
+import { Preloaded, useMutation, usePreloadedQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import z from "zod";
 import { toast } from "sonner";
@@ -44,7 +44,7 @@ export function CommentSection(props: {
     });
   }
   if (data == undefined) {
-    return <p>loading...</p>
+    return <p>loading...</p>;
   }
   return (
     <Card>
