@@ -7,10 +7,29 @@ import { Id } from "@/convex/_generated/dataModel";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { CommentSection } from "@/components/web/CommentSection";
+import { Metadata } from "next";
 
 interface PostIdRouteProps {
   params: {
     postId: Id<"posts">;
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: PostIdRouteProps): Promise<Metadata> {
+  const { postId } = await params;
+
+  const post = await fetchQuery(api.posts.getPostById, { postId: postId });
+  if (!post) {
+    return {
+      title: "Post not found",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.body,
   };
 }
 export default async function PostIdRoute({ params }: PostIdRouteProps) {
@@ -23,7 +42,7 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
 
   if (!post) {
     return (
-      <h1 className="text-6l font-extrabold text-red-500 p-20">
+      <h1 className="text-6xl font-extrabold text-red-500 p-20">
         Post not found
       </h1>
     );
@@ -66,7 +85,7 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
 
       <Separator className="my-8" />
 
-      <CommentSection preloadedComments={preloadedComments}/>
+      <CommentSection preloadedComments={preloadedComments} />
     </div>
   );
 }

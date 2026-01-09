@@ -14,6 +14,9 @@ export const revalidate = 30;
 export const metadata: Metadata = {
   title: "Blog | Next.js 16 Tutorial",
   description: "Insights, thoughts, and trends from our team.",
+  category: "Web Development",
+  creator: "Greg Delgado",
+  authors: [{ name: "Greg Delgado" }],
 }
 
 export default function BlogPage() {
