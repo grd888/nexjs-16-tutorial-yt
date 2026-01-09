@@ -8,6 +8,8 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { CommentSection } from "@/components/web/CommentSection";
 import { Metadata } from "next";
+import { PostPresence } from "@/components/web/PostPresence";
+import { getToken } from "@/lib/auth-server";
 
 interface PostIdRouteProps {
   params: {
@@ -34,10 +36,11 @@ export async function generateMetadata({
 }
 export default async function PostIdRoute({ params }: PostIdRouteProps) {
   const { postId } = await params;
-
-  const [post, preloadedComments] = await Promise.all([
+  const token = await getToken();
+  const [post, preloadedComments, userId] = await Promise.all([
     fetchQuery(api.posts.getPostById, { postId: postId }),
     preloadQuery(api.comments.getCommentsByPostId, { postId: postId }),
+    fetchQuery(api.presence.getUserId, {}, { token }),
   ]);
 
   if (!post) {
@@ -75,6 +78,12 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
         <p className="text-sm text-muted-foreground">
           Posted on: {new Date(post._creationTime).toLocaleDateString()}
         </p>
+        {userId && (
+          <PostPresence
+            roomId={post._id}
+            userId={userId}
+          />
+        )}
       </div>
 
       <Separator className="my-8" />
