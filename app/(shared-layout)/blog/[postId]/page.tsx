@@ -75,15 +75,17 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
           {post.title}
         </h1>
 
-        <p className="text-sm text-muted-foreground">
-          Posted on: {new Date(post._creationTime).toLocaleDateString()}
-        </p>
-        {userId && (
-          <PostPresence
-            roomId={post._id}
-            userId={userId}
-          />
-        )}
+        <div className="flex items-center gap-2">
+          <p className="text-sm text-muted-foreground">
+            Posted on: {new Date(post._creationTime).toLocaleDateString()}
+          </p>
+          {userId && (
+            <PostPresence
+              roomId={post._id}
+              userId={userId}
+            />
+          )}
+        </div>
       </div>
 
       <Separator className="my-8" />
