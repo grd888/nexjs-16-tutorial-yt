@@ -1,11 +1,18 @@
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import React, { useState } from "react";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import Link from "next/link";
 
 export function SearchInput() {
   const [term, setTerm] = useState("");
   const [open, setOpen] = useState(false);
 
+  const results = useQuery(
+    api.posts.searchPosts,
+    term.length >= 2 ? { limit: 5, term: term } : "skip"
+  );
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setTerm(e.target.value);
     setOpen(true);
@@ -24,7 +31,25 @@ export function SearchInput() {
       </div>
       {open && (
         <div className="absolute top-full mt-2 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in fade-in-0 zoom-in-95">
-          <p>Search Results</p>
+          {results === undefined ? (
+            <div>
+              <Loader2 />
+              Searching ...
+            </div>
+          ) : results.length === 0 ? (
+            <div>No results found</div>
+          ) : (
+            <div className="py-1">
+              {results.map((post) => (
+                <Link
+                  href={`/blog/${post._id}`}
+                  key={post._id}
+                >
+                  <p>{post.title}</p>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
