@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         hostname: "original-owl-320.convex.cloud",
         protocol: "https",
         port: ""
+      },
+      {
+        hostname: "original-lynx-902.convex.cloud",
+        protocol: "https",
+        port: ""
       }
     ]
   }
